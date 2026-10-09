@@ -14,12 +14,6 @@ function getComputerChoice() {
     }
 }
 
-// Step 3: Write the logic to get the human choice
-function getHumanChoice() {
-    let choice = prompt("Choose between Rock, Paper and Scissors: ").toLowerCase();
-    return choice;
-}
-
 // Step 4: Declare the players score variables
 let humanScore = 0;
 let computerScore = 0;
@@ -43,6 +37,7 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+// Create buttons and results containers dynamically in JavaScript
 const rockButton = document.createElement("button");
 rockButton.textContent = "Rock";
 
@@ -51,3 +46,68 @@ paperButton.textContent = "Paper";
 
 const scissorsButton = document.createElement("button");
 scissorsButton.textContent = "Scissors";
+
+document.body.appendChild(rockButton);
+document.body.appendChild(paperButton);
+document.body.appendChild(scissorsButton);
+
+// Create a results div and score div for the DOM
+const resultsDiv = document.createElement("div");
+resultsDiv.textContent = "Make your choice to play!";
+
+const scoreDiv = document.createElement("div");
+scoreDiv.style.fontWeight = "bold";
+scoreDiv.textContent = `Score -> Human: ${humanScore} | Computer: ${computerScore}`;
+
+const winnerDiv = document.createElement("div");
+winnerDiv.style.color = "blue";
+
+document.body.appendChild(resultsDiv);
+document.body.appendChild(scoreDiv);
+document.body.appendChild(winnerDiv);
+
+// Helper function to check if someone reached 5 points
+function checkWinner() {
+    if (humanScore === 5) {
+        winnerDiv.textContent = "You won the game by reaching 5 points!";
+        disableButtons();
+    } else if (computerScore === 5) {
+        winnerDiv.textContent = "Computer won the game by reaching 5 points!";
+        disableButtons();
+    }
+}
+
+// Helper function to disable buttons when the game ends
+function disableButtons() {
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
+}
+
+// Event listeners calling playRound and updating DOM elements
+rockButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    const result = playRound("rock", computerSelection);
+    
+    resultsDiv.textContent = result;
+    scoreDiv.textContent = `Score -> Human: ${humanScore} | Computer: ${computerScore}`;
+    checkWinner();
+});
+
+paperButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    const result = playRound("paper", computerSelection);
+    
+    resultsDiv.textContent = result;
+    scoreDiv.textContent = `Score -> Human: ${humanScore} | Computer: ${computerScore}`;
+    checkWinner();
+});
+
+scissorsButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    const result = playRound("scissors", computerSelection);
+    
+    resultsDiv.textContent = result;
+    scoreDiv.textContent = `Score -> Human: ${humanScore} | Computer: ${computerScore}`;
+    checkWinner();
+});
