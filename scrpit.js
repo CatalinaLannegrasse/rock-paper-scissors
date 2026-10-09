@@ -20,47 +20,34 @@ function getHumanChoice() {
     return choice;
 }
 
-// Step 6: Write the logic to play the entire game
-function playGame() {
-    // Step 4: Declare the players score variables
-    let humanScore = 0;
-    let computerScore = 0;
+// Step 4: Declare the players score variables
+let humanScore = 0;
+let computerScore = 0;
 
-    // Step 5: Write the logic to play a single round
-    function playRound(humanChoice, computerChoice) {
-        humanChoice = humanChoice.toLowerCase();
-
-        if (
-            (humanChoice === "rock" && computerChoice === "scissors") || 
-            (humanChoice === "paper" && computerChoice === "rock") || 
-            (humanChoice === "scissors" && computerChoice === "paper")
-        ) {
-            humanScore += 1;
-            return `Congratulations! You won. ${humanChoice} beats ${computerChoice}`;
-        } else if (humanChoice === computerChoice) {
-            return `It´s a tie. Both chose ${humanChoice}`;
-        } else {
-            computerScore += 1;
-            return `Sorry! Computer won. ${computerChoice} beats ${humanChoice}`;
-        }
-    }
-
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        
-        const roundResult = playRound(humanSelection, computerSelection);
-        console.log(roundResult);
-        console.log(`Score -> Human: ${humanScore} | Computer: ${computerScore}`);
-    }
-
-    if (humanScore > computerScore) {
-        console.log("Game Over: You won the entire game!");
-    } else if (computerScore > humanScore) {
-        console.log("Game Over: The computer won the entire game!");
+// Step 5: Write the logic to play a single round
+function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase();
+    
+    if (
+        (humanChoice === "rock" && computerChoice === "scissors") || 
+        (humanChoice === "paper" && computerChoice === "rock") || 
+        (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+        humanScore += 1;
+        return `Congratulations! You won. ${humanChoice} beats ${computerChoice}`;
+    } else if (humanChoice === computerChoice) {
+        return `It´s a tie. Both chose ${humanChoice}`;
     } else {
-        console.log("Game Over: It's an overall tie!");
+        computerScore += 1;
+        return `Sorry! Computer won. ${computerChoice} beats ${humanChoice}`;
     }
 }
 
-playGame();
+const rockButton = document.createElement("button");
+rockButton.textContent = "Rock";
+
+const paperButton = document.createElement("button");
+paperButton.textContent = "Paper";
+
+const scissorsButton = document.createElement("button");
+scissorsButton.textContent = "Scissors";
